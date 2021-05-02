@@ -190,6 +190,11 @@ class Ofx
             $statementResponse->LEDGERBAL->DTASOF,
             true
         );
+        $bankAccount->availableBalance = $statementResponse->AVAILBAL->BALAMT;
+        $bankAccount->availableBalanceDate = Utils::createDateTimeFromStr(
+            $statementResponse->AVAILBAL->DTASOF,
+            true
+        );
 
         $bankAccount->statement = new Statement();
         $bankAccount->statement->currency = $statementResponse->CURDEF;
@@ -229,6 +234,8 @@ class Ofx
         $creditAccount->accountType = $xml->CCSTMTRS->$nodeName->ACCTTYPE;
         $creditAccount->balance = $xml->CCSTMTRS->LEDGERBAL->BALAMT;
         $creditAccount->balanceDate = Utils::createDateTimeFromStr($xml->CCSTMTRS->LEDGERBAL->DTASOF, true);
+        $creditAccount->availableBalance = $xml->CCSTMTRS->AVAILBAL->BALAMT;
+        $creditAccount->availableBalanceDate = Utils::createDateTimeFromStr($xml->CCSTMTRS->AVAILBAL->DTASOF, true);
 
         $creditAccount->statement = new Statement();
         $creditAccount->statement->currency = $xml->CCSTMTRS->CURDEF;

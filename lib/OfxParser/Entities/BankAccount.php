@@ -27,6 +27,16 @@ class BankAccount extends AbstractEntity
     /**
      * @var string
      */
+    public $availableBalance;
+
+    /**
+     * @var \DateTimeInterface
+     */
+    public $availableBalanceDate;
+
+    /**
+     * @var string
+     */
     public $routingNumber;
 
     /**
